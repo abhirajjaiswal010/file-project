@@ -1,8 +1,10 @@
 import {connect} from 'mongoose';
+require('dotenv').config();
+
 
 const connectToMongo =async () => {
   try{
-    await connect('mongodb://localhost:27017',{
+    await connect(process.env.MONGO_URI,{
       dbName:"paymentGateway"
     });
     console.log("database connect successfully");
