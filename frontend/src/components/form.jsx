@@ -50,7 +50,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
             name="phone"
               type="number"
               id="phone"
-              placeholder="Enter your email"
+              placeholder="Enter your phone number"
               className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               
             />
