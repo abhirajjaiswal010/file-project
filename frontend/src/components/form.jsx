@@ -67,7 +67,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               className="px-4  py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.name && (
-              <p className="text-red-600 text-xs">{errors.name}</p>
+              <p className="text-red-600 text-xs transition-all duration-300">{errors.name}</p>
             )}
           </div>
 
@@ -86,7 +86,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               className="px-4  py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.email && (
-              <p className="text-red-600 text-sm mt-1">{errors.email}</p>
+              <p className="text-red-600 text-xs transition-all duration-300">{errors.email}</p>
             )}
           </div>
 
@@ -106,7 +106,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               className="px-4  py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.phone && (
-              <p className="text-red-600 text-sm mt-1">{errors.phone}</p>
+              <p className="text-red-600 text-xs transition-all duration-300  ">{errors.phone}</p>
             )}
           </div>
 
@@ -213,17 +213,20 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
 
             {/* Error Display */}
             {errors.quantity && (
-              <p className="text-red-600 text-sm mt-1">{errors.quantity}</p>
+              <p className="text-red-600 text-xs transition duration-300">{errors.quantity}</p>
             )}
           </div>
 
           {/* Submit */}
-          <button
-            type="submit"
-            className="rounded-2xl border-2 border-dashed border-black bg-white px-6 py-3 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none"
-          >
-            Submit Order
-          </button>
+         <div className="flex justify-center">
+  <button
+    type="submit"
+    className="rounded-2xl border-2 border-dashed border-black bg-white px-6 py-3 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none "
+  >
+    Submit Order
+  </button>
+</div>
+
         </form>
       </div>
     </div>
