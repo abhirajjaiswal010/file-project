@@ -2,14 +2,15 @@ import React from "react";
 import productImg from "../assets/png-file-.png"; // Adjust the path accordingly
 import  {useNavigate}  from 'react-router-dom';
 import { Toaster } from "react-hot-toast";
+import { Footer } from "../components/footer";
 export const Home = () => {
   const navigate=useNavigate()
   return (
     
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center p-5 min-h-screen bg-gray-50 w-screen">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 items-center p-5 h-screen bg-gray-50 w-screen">
       {/* Image Section */}
       <div className="flex justify-center">
-        <div className="w-80   transform transition-transform duration-300 hover:scale-105">
+        <div className="w-80     transform transition-transform duration-300 hover:scale-105">
           <img
             src={productImg}
             alt="SVCE Product"
@@ -44,5 +45,6 @@ export const Home = () => {
         </button>
       </div>
     </div>
+    
   );
 };
