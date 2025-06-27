@@ -26,13 +26,15 @@ router.post("/order", async (req, res) => {
     const order = await razorpayInstance.orders.create(options);
     res.status(200).json({ data: order });
   } catch (error) {
-    console.log(error);
-    res.status(500).json({ message: "Something went wrong" });
+    console.error("Order creation error:", error);
+    res.status(500).json({ message: "Something went wrong while creating order" });
   }
 });
 
 // Route 2: Verify payment
 router.post("/verify", async (req, res) => {
+  console.log("Verify request body:", req.body);  // Log incoming data
+
   const {
     razorpay_order_id,
     razorpay_payment_id,
@@ -45,6 +47,14 @@ router.post("/verify", async (req, res) => {
     quantity,
   } = req.body;
 
+  // Basic validation of required fields
+  if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+    return res.status(400).json({
+      success: false,
+      message: "Missing required Razorpay payment fields",
+    });
+  }
+
   try {
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSign = crypto
@@ -55,38 +65,38 @@ router.post("/verify", async (req, res) => {
     const isAuthentic = expectedSign === razorpay_signature;
     console.log("Signature verified:", isAuthentic);
 
-    if (isAuthentic) {
-      const payment = new Payment({
-        name,
-        email,
-        phone,
-        branch,
-        year,
-        quantity,
-        razorpay_order_id,
-        razorpay_payment_id,
-        razorpay_signature,
-      });
-
-      await payment.save();
-      return res.status(200).json({
-        success: true,
-        message: "Payment verified",
-      });
-    } else {
+    if (!isAuthentic) {
       return res.status(400).json({
         success: false,
         message: "Invalid signature",
       });
     }
+
+    const payment = new Payment({
+      name,
+      email,
+      phone,
+      branch,
+      year,
+      quantity,
+      razorpay_order_id,
+      razorpay_payment_id,
+      razorpay_signature,
+    });
+
+    await payment.save();
+    return res.status(200).json({
+      success: true,
+      message: "Payment verified and saved",
+    });
   } catch (error) {
-    console.error(error);
+    console.error("Payment verification error:", error);
     return res.status(500).json({
       success: false,
       message: "Server error",
+      error: error.message,   // Include error message for better debugging
     });
   }
 });
-
 
 export default router;
