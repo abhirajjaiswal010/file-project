@@ -1,20 +1,32 @@
 import connectToMongo from "./Database/db.js";
-import express from 'express'
+import express from 'express';
 import cors from 'cors';
 import payment from "./routes/payment.js";
-connectToMongo();
-const app =express()
-const port = 4000
-//middleware
+
+const app = express();
+const port = process.env.PORT || 4000; // allow Vercel to inject PORT
+
+// middleware
 app.use(express.json());
-app.use(cors())
+app.use(cors());
 
-app.get('/',(req,res)=>{
-  res.send('abhiraj')
-})
-app.use('/api/payment',payment)
+app.get('/', (req, res) => {
+  res.send('abhiraj');
+});
 
-app.listen(port,()=>{
-  console.log(`example app listening at http://localhost:${port}`);
-  
-})
+app.use('/api/payment', payment);
+
+// ✅ Ensure DB connection before accepting requests
+const startServer = async () => {
+  try {
+    await connectToMongo();
+    app.listen(port, () => {
+      console.log(`✅ Server listening at http://localhost:${port}`);
+    });
+  } catch (error) {
+    console.error("❌ Failed to connect to MongoDB:", error);
+    process.exit(1);
+  }
+};
+
+startServer();
