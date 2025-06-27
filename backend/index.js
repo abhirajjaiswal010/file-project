@@ -1,20 +1,34 @@
 import connectToMongo from "./Database/db.js";
-import express from 'express'
+import express from 'express';
 import cors from 'cors';
 import payment from "./routes/payment.js";
-connectToMongo();
-const app =express()
-const port = 4000
-//middleware
+
+// Connect to MongoDB with logs
+connectToMongo()
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch(err => console.error("❌ MongoDB connection error:", err));
+
+const app = express();
+
+// Use the correct port for Render deployment
+const port = process.env.PORT || 4000;
+
+// Middleware
 app.use(express.json());
-app.use(cors())
+app.use(cors({
+    origin: "*", // or "https://your-frontend-domain.com" for stricter security
+    methods: ["GET", "POST"]
+}));
 
-app.get('/',(req,res)=>{
-  res.send('abhiraj')
-})
-app.use('/api/payment',payment)
+// Test route
+app.get('/', (req, res) => {
+    res.send('✅ Backend is live - Abhiraj');
+});
 
-app.listen(port,()=>{
-  console.log(`example app listening at http://localhost:${port}`);
-  
-})
+// Payment routes
+app.use('/api/payment', payment);
+
+// Start the server
+app.listen(port, () => {
+    console.log(`🚀 Server running on port ${port}`);
+});
