@@ -33,7 +33,7 @@ router.post("/order", async (req, res) => {
 
 // Route 2: Verify payment
 router.post("/verify", async (req, res) => {
-  console.log("Verify request body:", req.body);  // Log incoming data
+  console.log("🔍 Incoming verify request body:", req.body);
 
   const {
     razorpay_order_id,
@@ -47,15 +47,12 @@ router.post("/verify", async (req, res) => {
     quantity,
   } = req.body;
 
-  // Basic validation of required fields
-  if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
-    return res.status(400).json({
-      success: false,
-      message: "Missing required Razorpay payment fields",
-    });
-  }
-
   try {
+    if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
+      console.log("❌ Missing required Razorpay fields");
+      return res.status(400).json({ success: false, message: "Missing required payment fields" });
+    }
+
     const sign = razorpay_order_id + "|" + razorpay_payment_id;
     const expectedSign = crypto
       .createHmac("sha256", process.env.RAZORPAY_KEY_SECRET)
@@ -63,13 +60,11 @@ router.post("/verify", async (req, res) => {
       .digest("hex");
 
     const isAuthentic = expectedSign === razorpay_signature;
-    console.log("Signature verified:", isAuthentic);
+    console.log("🔍 Signature verified:", isAuthentic);
 
     if (!isAuthentic) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid signature",
-      });
+      console.log("❌ Invalid signature detected");
+      return res.status(400).json({ success: false, message: "Invalid signature" });
     }
 
     const payment = new Payment({
@@ -85,18 +80,18 @@ router.post("/verify", async (req, res) => {
     });
 
     await payment.save();
-    return res.status(200).json({
-      success: true,
-      message: "Payment verified and saved",
-    });
+    console.log("✅ Payment saved to MongoDB");
+
+    return res.status(200).json({ success: true, message: "Payment verified and saved" });
   } catch (error) {
-    console.error("Payment verification error:", error);
+    console.error("❌ Error during verification:", error);
     return res.status(500).json({
       success: false,
-      message: "Server error",
-      error: error.message,   // Include error message for better debugging
+      message: "Server error during payment verification",
+      error: error.message,
     });
   }
 });
+
 
 export default router;
