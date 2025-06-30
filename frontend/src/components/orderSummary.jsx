@@ -1,3 +1,4 @@
+import GradientText from "../animation/shinytext";
 import { useRazorpayPayment } from "./razorpay";
 import { useNavigate } from "react-router-dom";
 export const OrderSummary = ({ price, total, formData, setSubmitted }) => {
@@ -16,11 +17,16 @@ export const OrderSummary = ({ price, total, formData, setSubmitted }) => {
  
 
   return (
-    <div className="h-screen w-screen flex justify-center items-center bg-gray-50 p-4 antialiased capitalize">
+    <div className="h-screen w-screen flex justify-center items-center bg-[#F6F0F0] p-4 antialiased capitalize">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-3">
-        <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">
-          Order Summary
-        </h2>
+        <GradientText
+                  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+                  animationSpeed={3}
+                  showBorder={false}
+                  className="custom-class text-3xl font-bold mb-3"
+                >
+                 Order Summary
+                </GradientText>
 
         <InfoRow label="Name" value={formData.name} color="#FAF1E6" />
         <InfoRow label="Email" value={formData.email} color="#FFFDF0" />

@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 
 export const OrderDetail = () => {
   // Fixed price per unit set by admin
-  const pricePerUnit = 15; // e.g., ₹100 per unit fixed
+  const pricePerUnit = 13; // e.g., ₹100 per unit fixed
 
   const [formdata, setFormData] = useState({
     name: "",

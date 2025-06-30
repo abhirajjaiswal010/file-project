@@ -4,7 +4,8 @@ import { Toaster } from "react-hot-toast";
 
 import TiltedCard from "../animation/titlecard";
 import DotGrid from "../animation/dotGrid";
-import ShinyText from "../animation/shinytext";
+
+
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -49,6 +50,9 @@ export const Home = () => {
 
         {/* Details Section */}
         <div className="space-y-5 bg-white p-8 rounded-xl shadow-xl max-w-md flex flex-col mx-auto z-10">
+         
+  
+
           <h1 className="text-4xl font-extrabold text-gray-800 leading-tight">
          SVCE Practical File
           </h1>
@@ -63,7 +67,11 @@ export const Home = () => {
             Number, Branch, Subject, and Department for clear identification.
           </p>
 
-          <p className="text-red-500 font-semibold mb-5">Price: ₹13/-</p>
+       <p className="mb-5">
+        <span className="text-green-400 font-semibold">Price  -  </span>
+  <span className="text-gray-500 line-through mr-2">₹25</span>
+  <span className="text-red-500 font-semibold">₹13/- Only !!</span>
+</p>
 
           <button
             className="rounded-2xl border-2 border-dashed border-black bg-white px-6 py-2 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none block mx-auto"

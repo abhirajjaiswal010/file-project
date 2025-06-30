@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GradientText from "../animation/shinytext";
 
 export const Form = ({ formData, onInputChange, onSubmit }) => {
   const [errors, setErrors] = useState({});
@@ -46,11 +47,17 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen w-screen bg-gray-100 p-5">
+    <div className="flex justify-center items-center h-screen w-screen bg-[#F6F0F0] p-4">
       <div className="bg-white p-5 rounded-xl shadow-lg ">
-        <h1 className="text-3xl font-bold text-gray-800 mb-7 text-center">
-          📝 Fill Your Order Details
-        </h1>
+        <GradientText
+          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+          showBorder={false}
+          className="custom-class text-3xl font-bold mb-3"
+        >
+          Fill Your Order Details
+        </GradientText>
+
         <form className="space-y-5" onSubmit={handleSubmit} noValidate>
           {/* Name */}
           <div className="flex flex-col">
@@ -67,7 +74,9 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               className="px-4  py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.name && (
-              <p className="text-red-600 text-xs transition-all duration-300">{errors.name}</p>
+              <p className="text-red-600 text-xs transition-all duration-300">
+                {errors.name}
+              </p>
             )}
           </div>
 
@@ -86,7 +95,9 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               className="px-4  py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.email && (
-              <p className="text-red-600 text-xs transition-all duration-300">{errors.email}</p>
+              <p className="text-red-600 text-xs transition-all duration-300">
+                {errors.email}
+              </p>
             )}
           </div>
 
@@ -102,11 +113,14 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               type="number"
               id="phone"
               min="0"
+              max="10"
               placeholder="10-digit phone number"
               className="px-4  py-1.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
             {errors.phone && (
-              <p className="text-red-600 text-xs transition-all duration-300  ">{errors.phone}</p>
+              <p className="text-red-600 text-xs transition-all duration-300  ">
+                {errors.phone}
+              </p>
             )}
           </div>
 
@@ -120,7 +134,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               value={formData.branch}
               onChange={handleInputChange}
               id="branch"
-              className="px-4  py12 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4  py-1.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">-- Select --</option>
               <option value="Computer Science">Computer Science</option>
@@ -147,7 +161,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
               value={formData.year}
               onChange={handleInputChange}
               id="year"
-              className="px-4  py12 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="px-4  py-1.5 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
             >
               <option value="">-- Select --</option>
               <option value="Freshman / First Year">
@@ -183,7 +197,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
                     },
                   });
                 }}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-xl"
+                className="px-3 py-1 bg-red-400 rounded hover:bg-gray-300 text-xl text-white"
               >
                 -
               </button>
@@ -205,7 +219,7 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
                     },
                   });
                 }}
-                className="px-3 py-1 bg-gray-200 rounded hover:bg-gray-300 text-xl"
+                className="px-3 py-1 bg-green-400 rounded hover:bg-gray-300 text-xl text-white"
               >
                 +
               </button>
@@ -213,20 +227,21 @@ export const Form = ({ formData, onInputChange, onSubmit }) => {
 
             {/* Error Display */}
             {errors.quantity && (
-              <p className="text-red-600 text-xs transition duration-300">{errors.quantity}</p>
+              <p className="text-red-600 text-xs transition duration-300">
+                {errors.quantity}
+              </p>
             )}
           </div>
 
           {/* Submit */}
-         <div className="flex justify-center">
-  <button
-    type="submit"
-    className="rounded-2xl border-2 border-dashed border-black bg-white px-6 py-3 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none "
-  >
-    Submit Order
-  </button>
-</div>
-
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="rounded-2xl border-2 border-dashed border-black bg-white px-6 py-3 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none "
+            >
+              Submit Order
+            </button>
+          </div>
         </form>
       </div>
     </div>
