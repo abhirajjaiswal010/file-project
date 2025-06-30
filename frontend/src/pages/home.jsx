@@ -63,7 +63,7 @@ export const Home = () => {
             Number, Branch, Subject, and Department for clear identification.
           </p>
 
-          <p className="text-red-500 font-semibold mb-5">Price: ₹15/-</p>
+          <p className="text-red-500 font-semibold mb-5">Price: ₹13/-</p>
 
           <button
             className="rounded-2xl border-2 border-dashed border-black bg-white px-6 py-2 font-semibold uppercase text-black transition-all duration-300 hover:translate-x-[-4px] hover:translate-y-[-4px] hover:rounded-md hover:shadow-[4px_4px_0px_black] active:translate-x-[0px] active:translate-y-[0px] active:rounded-2xl active:shadow-none block mx-auto"
