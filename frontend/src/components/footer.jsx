@@ -4,7 +4,7 @@ export const Footer = () => {
   const location = useLocation();
 
   return (
-    <footer className="bg-gray-100 text-gray-700 py-6 ">
+    <footer className="bg-[#FEF3E2] text-gray-700 py-6 ">
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4 gap-4 text-center sm:text-left">
 
         <div className="text-sm">

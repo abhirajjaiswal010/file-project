@@ -1,29 +1,56 @@
 import React from "react";
-import productImg from "../assets/png-file-.png"; // Adjust the path accordingly
 import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import { Footer } from "../components/footer";
+
+import TiltedCard from "../animation/titlecard";
+import DotGrid from "../animation/dotGrid";
+import ShinyText from "../animation/shinytext";
 
 export const Home = () => {
   const navigate = useNavigate();
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-50 w-screen p-5">
+    <div className="relative w-screen min-h-screen overflow-hidden bg-gray-[#f7ede2]  flex items-center justify-center">
+      
+      {/* DotGrid Background */}
+      <div className="absolute inset-0 -z-9 w-screen h-screen">
+        <DotGrid
+          dotSize={4}
+          gap={11}
+          baseColor="#FEF3E2"
+          activeColor="#F3C623"
+          proximity={100}
+          shockRadius={50}
+          shockStrength={5}
+          resistance={750}
+          returnDuration={1.5}
+        />
+      </div>
+
+      {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-5xl w-full">
         {/* Image Section */}
         <div className="flex justify-center">
-          <div className="w-80 transform transition-transform duration-300 hover:scale-105">
-            <img
-              src={productImg}
-              alt="SVCE Product"
-              className="rounded-lg object-cover"
-            />
-          </div>
+          <TiltedCard
+            imageSrc="/file.svg"
+            altText="SVCE File"
+            captionText="SVCE Practical File"
+            containerHeight="300px"
+            containerWidth="300px"
+            imageHeight="300px"
+            imageWidth="300px"
+            rotateAmplitude={12}
+            scaleOnHover={1.2}
+            showMobileWarning={false}
+            showTooltip={true}
+            displayOverlayContent={true}
+          />
         </div>
 
         {/* Details Section */}
-        <div className="space-y-5 bg-white p-8 rounded-xl shadow-xl max-w-md flex flex-col mx-auto">
+        <div className="space-y-5 bg-white p-8 rounded-xl shadow-xl max-w-md flex flex-col mx-auto z-10">
           <h1 className="text-4xl font-extrabold text-gray-800 leading-tight">
-            SVCE Practical File
+         SVCE Practical File
           </h1>
 
           <h5 className="text-xl font-medium text-blue-500 tracking-wide">
@@ -49,8 +76,8 @@ export const Home = () => {
           </button>
         </div>
       </div>
+
       <Toaster />
-      
     </div>
   );
 };
