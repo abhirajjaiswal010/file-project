@@ -21,7 +21,7 @@ export const ShippingPolicy = () => (
   </p>
 
   <p className="text-gray-700 text-base leading-relaxed">
-    If your package is delayed beyond the expected delivery timeframe, please reach out to us at <span className="font-semibold">yourbusiness@email.com</span> or via WhatsApp, and we will promptly coordinate with the courier to resolve the issue. Your satisfaction and trust are important to us.
+    If your package is delayed beyond the expected delivery timeframe, please reach out to us at <span className="font-semibold">harshittg143@gmail.com</span> or via WhatsApp, and we will promptly coordinate with the courier to resolve the issue. Your satisfaction and trust are important to us.
   </p>
 </section>
 

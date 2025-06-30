@@ -8,7 +8,7 @@ export const Footer = () => {
       <div className="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center px-4 gap-4 text-center sm:text-left">
 
         <div className="text-sm">
-          © {new Date().getFullYear()} YourCompanyName. All rights reserved.
+          © {new Date().getFullYear()} SVCEFile. All rights reserved.
         </div>
 
         <div className="flex flex-wrap justify-center sm:justify-end gap-4 text-sm">

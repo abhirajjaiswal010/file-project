@@ -5,11 +5,11 @@ export const PrivacyPolicy = () => (
   </h5>
 
   <p className="text-gray-700 text-base leading-relaxed mb-4">
-    <span className="font-semibold">Effective Date:</span> [Date]
+    <span className="font-semibold">Effective Date:</span> [30 June 2025]
   </p>
 
   <p className="text-gray-700 text-base leading-relaxed mb-4">
-    At <span className="font-semibold">[Your Website Name]</span>, we are committed to protecting your privacy. We only collect personal information necessary to provide you with our products and services.
+    At <span className="font-semibold">SVCE File</span>, we are committed to protecting your privacy. We only collect personal information necessary to provide you with our products and services.
   </p>
 
   <h6 className="font-semibold text-gray-800 mb-2">What We Collect:</h6>
@@ -34,7 +34,7 @@ export const PrivacyPolicy = () => (
   </p>
 
   <p className="text-gray-700 text-base leading-relaxed">
-    For any concerns or questions about your privacy, please contact us at: <a href="mailto:harshittg143@gmail.com" className="text-blue-500 underline">yourbusiness@email.com</a>.
+    For any concerns or questions about your privacy, please contact us at: <a href="mailto:harshittg143@gmail.com" className="text-blue-500 underline">harshittg143@gmail.com</a>.
   </p>
 </section>
 
