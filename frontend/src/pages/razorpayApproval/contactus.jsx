@@ -13,7 +13,7 @@ export const ContactUs = () => (
   <div className="text-gray-800 text-base space-y-1">
     <p><span className="font-semibold">Email:</span> harshittg143@gmail.com</p>
     <p><span className="font-semibold">Phone:</span> +91-8817880287</p>
-    <p><span className="font-semibold">Address:</span> Indore [Madhya Pradesh] , India</p>
+    <p><span className="font-semibold capitalize">Address:</span> 612,B , bhagyarekha appartment, khatiwala tank , tower square , bhawarkuan Indore, 452010</p>
   </div>
 
   <p className="text-gray-700 text-base leading-relaxed mt-2">
