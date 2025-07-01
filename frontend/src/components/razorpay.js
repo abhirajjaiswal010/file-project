@@ -13,7 +13,7 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
         modal: {
         ondismiss: function () {
             // Called when user closes/cancels payment
-            toast.error("❌ Order payment cancelled by user.");
+            toast.error("Order payment cancelled by user");
         }},
       method: {
         upi: true,
