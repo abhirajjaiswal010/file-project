@@ -22,6 +22,7 @@ router.post("/order", async (req, res) => {
       amount: Number(amount * 100),
       currency: "INR",
       receipt: crypto.randomBytes(10).toString("hex"),
+      
     };
     console.log("Creating order with amount:", amount);
 
