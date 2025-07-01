@@ -4,6 +4,7 @@ import { Toaster } from "react-hot-toast";
 
 import TiltedCard from "../animation/titlecard";
 import DotGrid from "../animation/dotGrid";
+import Waves from "../animation/dotGrid";
 
 
 
@@ -15,17 +16,19 @@ export const Home = () => {
       
       {/* DotGrid Background */}
       <div className="absolute inset-0 -z-9 w-screen h-screen">
-        <DotGrid
-          dotSize={4}
-          gap={11}
-          baseColor="#FEF3E2"
-          activeColor="#F3C623"
-          proximity={100}
-          shockRadius={50}
-          shockStrength={5}
-          resistance={750}
-          returnDuration={1.5}
-        />
+       <Waves
+  lineColor="#E8988A"
+  backgroundColor="rgba(255, 255, 255, 0.2)"
+  waveSpeedX={0.02}
+  waveSpeedY={0.01}
+  waveAmpX={40}
+  waveAmpY={20}
+  friction={0.9}
+  tension={0.01}
+  maxCursorMove={120}
+  xGap={12}
+  yGap={36}
+/>
       </div>
 
       {/* Main Content */}
