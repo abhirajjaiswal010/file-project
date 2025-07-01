@@ -52,7 +52,7 @@ export const Home = () => {
         </div>
 
         {/* Details Section */}
-        <div className="space-y-5 bg-white p-8 rounded-xl shadow-xl max-w-md flex flex-col mx-auto z-10">
+        <div className="space-y-5 bg-white p-8 rounded-xl shadow-xl max-w-[21rem] flex flex-col mx-auto z-10">
          
   
 
