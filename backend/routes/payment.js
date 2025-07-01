@@ -23,6 +23,8 @@ router.post("/order", async (req, res) => {
       currency: "INR",
       receipt: crypto.randomBytes(10).toString("hex"),
     };
+    console.log("Creating order with amount:", amount);
+
     const order = await razorpayInstance.orders.create(options);
     res.status(200).json({ data: order });
   } catch (error) {
