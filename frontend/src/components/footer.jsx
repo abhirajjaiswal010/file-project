@@ -15,7 +15,7 @@ export const Footer = () => {
           {location.pathname !== "/" && (
             <Link to="/" className="hover:underline">Home</Link>
           )}
-          <Link to="/contact-us" className="hover:underline">Contact Us</Link>
+          <Link to="/contact-us" className="hover:underline">Contact Us </Link>
           <Link to="/shipping-policy" className="hover:underline">Shipping Policy</Link>
           <Link to="/terms-and-conditions" className="hover:underline">Terms & Conditions</Link>
           <Link to="/cancellations-and-refunds" className="hover:underline">Cancellations & Refunds</Link>

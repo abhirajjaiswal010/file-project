@@ -13,7 +13,7 @@ export const Header = () => {
             animation: "marquee 12s linear infinite",
           }}
         >
-          🚀 Order now for early bird delivery on Mon bun🚀
+          🚀 Order now for early bird delivery on Mon 🚀
         </div>
       </div>
 
