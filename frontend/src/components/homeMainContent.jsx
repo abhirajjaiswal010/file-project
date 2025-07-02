@@ -36,7 +36,7 @@ export const HomeContent = () => {
       <div className="flex justify-center mb-6 md:mb-0">
         <TiltedCard
           imageSrc="/inkjet.svg"
-          altText="SVCE File"
+          altText="*"
           captionText="SVCE Practical File"
           containerHeight="300px"
           containerWidth="300px"
