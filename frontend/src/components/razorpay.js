@@ -1,20 +1,25 @@
 import toast from "react-hot-toast";
 
 export const useRazorpayPayment = (formData, total, backendUrl) => {
-  // Payment verification with Razorpay handler
-  const handlePaymentVerify = async (data, onSuccess) => {
+  // Payment verification & Razorpay checkout handler
+  const handlePaymentVerify = (orderData, onSuccess) => {
+    if (!orderData) {
+      toast.error("Payment order data is missing.");
+      return;
+    }
+
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
-      amount: data.amount,
-      currency: data.currency,
+      amount: orderData.amount,
+      currency: orderData.currency,
       name: formData.name,
       description: "test mode",
-      order_id: data.id,
-        modal: {
-        ondismiss: function () {
-            // Called when user closes/cancels payment
-            toast.error("Order payment cancelled by user");
-        }},
+      order_id: orderData.id,
+      modal: {
+        ondismiss: () => {
+          toast.error("Order payment cancelled by user");
+        },
+      },
       method: {
         upi: true,
         card: false,
@@ -24,7 +29,6 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
         paylater: false,
       },
       handler: async (response) => {
-        // Show verifying loader
         const verifyPromise = fetch(`${backendUrl}/api/payment/verify`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -41,7 +45,7 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
               onSuccess({
                 ...formData,
                 razorpay_order_id: response.razorpay_order_id,
-                totalAmount: data.amount / 100,
+                totalAmount: orderData.amount / 100,
               });
               return "Payment verified successfully!";
             } else {
@@ -52,7 +56,6 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
             throw new Error("Verification request failed.");
           });
 
-        // Use toast.promise for loader during verification
         toast.promise(verifyPromise, {
           loading: "Verifying payment...",
           success: (msg) => msg,
@@ -63,7 +66,7 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
         name: formData.name,
         email: formData.email,
       },
-      theme: { color: "#FEF3E2" },
+      theme: { color: "#F97316" }, // Warm & Friendly theme you wanted
     };
 
     if (!window.Razorpay) {
@@ -76,7 +79,7 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
   };
 
   // Payment initiation handler
-  const handlePayment = async (onSuccess) => {
+  const handlePayment = (onSuccess) => {
     const initiatePaymentPromise = fetch(`${backendUrl}/api/payment/order`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -84,17 +87,20 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
     })
       .then(async (res) => {
         const data = await res.json();
-        if (data.success === false) {
-          throw new Error(data.message || "Failed to initiate payment.");
+
+        if (!data || data.success === false) {
+          throw new Error(data?.message || "Failed to initiate payment.");
         }
-        handlePaymentVerify(data.data, onSuccess);
+
+        // IMPORTANT: Your backend sends order object directly, so pass 'data' here (not data.data)
+        handlePaymentVerify(data, onSuccess);
+
         return "Redirecting to Razorpay...";
       })
       .catch((err) => {
         throw new Error(err.message || "Payment initiation failed.");
       });
 
-    // Show loader while creating order
     toast.promise(initiatePaymentPromise, {
       loading: "Initiating payment...",
       success: (msg) => msg,
