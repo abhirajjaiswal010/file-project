@@ -52,7 +52,7 @@ export const HomeContent = () => {
 
       {/* Details Section */}
       <div
-        className="space-y-8 bg-gradient-to-br from-[#fdfbfb] to-[#ebedee] p-9 rounded-xl shadow-xl w-full max-w-[27.5rem] h-auto mx-auto z-10"
+        className="space-y-8 bg-gradient-to-br from-[#fdfbfb] to-[#ebedee] p-9 rounded-xl shadow-xl w-[104%] max-w-[27.5rem] h-auto mx-auto z-10"
         onDrop={handleDrop}
         onDragOver={handleDragOver}
       >

@@ -33,6 +33,6 @@ html, body {
 }
 .dots::after {
   display: inline-block;
-  animation: dots 1.5s steps(4, end) infinite;
+  animation: dots 2s steps(4, end) infinite;
   content: "";
 }
