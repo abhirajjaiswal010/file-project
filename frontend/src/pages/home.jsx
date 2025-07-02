@@ -11,25 +11,11 @@ export const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="relative w-screen min-h-screen overflow-hidden bg-[#f7ede2] flex flex-col items-center justify-center px-4 md:px-8 py-8">
+    <div className="relative w-screen min-h-screen overflow-hidden bg-gradient-to-br from-[#fde082] to-[#fdbaa8] flex flex-col items-center justify-center px-4 md:px-8 py-8">
       <Header />
 
       {/* Background Waves */}
-      <div className="absolute inset-0 -z-10 w-full h-full">
-        <Waves
-          lineColor="#E8988A"
-          backgroundColor="rgba(255, 255, 255, 0.2)"
-          waveSpeedX={0.02}
-          waveSpeedY={0.01}
-          waveAmpX={40}
-          waveAmpY={20}
-          friction={0.9}
-          tension={0.01}
-          maxCursorMove={120}
-          xGap={12}
-          yGap={36}
-        />
-      </div>
+      
 
       {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-2  items-center max-w-[55rem] w-full mt-10">
@@ -52,7 +38,7 @@ export const Home = () => {
         </div>
 
         {/* Details Section */}
-        <div className="space-y-6 bg-white p-8 rounded-xl shadow-xl max-w-md mx-auto z-10">
+        <div className="space-y-6 bg-gradient-to-br from-[#fdfbfb] to-[#ebedee] p-8 rounded-xl shadow-xl max-w-md mx-auto z-10">
           <h1 className="text-4xl font-extrabold text-gray-800 leading-tight text-center">
             SVCE Practical File
           </h1>

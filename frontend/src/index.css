@@ -13,6 +13,7 @@ input::-webkit-inner-spin-button {
 html, body {
   overflow-x: hidden;
   font-family: lato;
+  
 }
 @keyframes marquee {
   0% {

@@ -4,8 +4,8 @@ import { OrderSummary } from "../components/orderSummary";
 import toast from "react-hot-toast";
 
 export const OrderDetail = () => {
-  // Fixed price per unit set by admin
-  const pricePerUnit = 13; // e.g., ₹100 per unit fixed
+  // Fixed price per unit set by admin in ₹
+  const pricePerUnit = 13; // ₹13 per unit
 
   const [formdata, setFormData] = useState({
     name: "",
@@ -34,25 +34,29 @@ export const OrderDetail = () => {
       !formdata.year ||
       !formdata.quantity
     ) {
-      toast.error("Please fill all fields.", {
-        duration: 1000,
-      });
-
+      toast.error("Please fill all fields.", { duration: 1000 });
       return;
     }
 
     if (Number(formdata.quantity) > 5) {
-      toast.error("Quantity must be less than 6", {
-        duration: 1000,
-      });
+      toast.error("Quantity must be less than 6", { duration: 1000 });
       return;
     }
 
     setSubmitted(true);
-    toast.success("Form Fill Successfully")
+    toast.success("Form filled successfully");
   };
 
-  const totalPrice = Number(formdata.quantity) * pricePerUnit;
+  const quantity = Number(formdata.quantity) || 0;
+
+  // Core Razorpay fee + GST calculation
+  const baseAmount = quantity * pricePerUnit * 100; // in paise
+  const platformFee = baseAmount * 0.02; // 2%
+  const gst = platformFee * 0.18; // 18% on platform fee
+  const finalAmount = baseAmount + platformFee + gst; // in paise
+
+  // Convert to ₹ with 2 decimals for display
+  const finalAmountInRupees = (finalAmount / 100).toFixed(2);
 
   return (
     <>
@@ -61,12 +65,11 @@ export const OrderDetail = () => {
           formData={formdata}
           onInputChange={handleInputData}
           onSubmit={handleSubmitbtn}
-          // send to form to show price info (optional)
         />
       ) : (
         <OrderSummary
           price={pricePerUnit}
-          total={totalPrice}
+          total={finalAmountInRupees} // pass the final amount including fees
           formData={formdata}
           setSubmitted={setSubmitted}
         />
