@@ -63,7 +63,7 @@ export const useRazorpayPayment = (formData, total, backendUrl) => {
         name: formData.name,
         email: formData.email,
       },
-      theme: { color: "#3399cc" },
+      theme: { color: "#FEF3E2" },
     };
 
     if (!window.Razorpay) {
