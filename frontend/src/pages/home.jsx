@@ -3,9 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
 import TiltedCard from "../animation/titlecard";
- // assuming Waves is a different component from DotGrid
+// assuming Waves is a different component from DotGrid
 import Header from "../components/header";
 import Waves from "../animation/dotGrid";
+import { HomeContent } from "../components/homeMainContent";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -15,7 +16,6 @@ export const Home = () => {
       <Header />
 
       {/* Background Waves */}
-      
 
       {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-2  items-center max-w-[55rem] w-full mt-10">
@@ -68,7 +68,7 @@ export const Home = () => {
           </button>
         </div>
       </div>
-
+      <HomeContent />
       <Toaster />
     </div>
   );
