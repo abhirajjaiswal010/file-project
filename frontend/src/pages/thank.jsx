@@ -17,7 +17,20 @@ const ThankYouPage = () => {
   } = state;
 
   return (
+    
     <div className="p-6">
+       <div className="bg-yellow-200 text-gray-800 py-2 overflow-hidden relative rounded-lg mb-3">
+        <div
+          className="whitespace-nowrap text-sm md:text-base font-semibold "
+          style={{
+            display: "inline-block",
+            whiteSpace: "nowrap",
+            animation: "marquee 12s linear infinite",
+          }}
+        >
+          🚀 Order now for early bird delivery on Mon bun🚀
+        </div>
+      </div>
       <h1 className="text-3xl font-bold text-green-600">Thank you!</h1>
       <p>Your order will be delivered at your college. 😊</p>
       <p className="mb-4">📞 For help: <strong>7987109645</strong></p>
