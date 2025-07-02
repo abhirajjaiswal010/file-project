@@ -88,7 +88,7 @@ export const HomeContent = () => {
        
         </div>
         <p className="text-lg font-semibold text-gray-600 text-center text-red-500">
-  Working in progress<span className="dots"></span>
+  Work in progress<span className="dots"></span>
 </p>
 
       </div>
