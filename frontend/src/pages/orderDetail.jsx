@@ -49,31 +49,36 @@ export const OrderDetail = () => {
 
   const quantity = Number(formdata.quantity) || 0;
 
-  // Core Razorpay fee + GST calculation
-  const baseAmount = quantity * pricePerUnit * 100; // in paise
-  const platformFee = baseAmount * 0.02; // 2%
-  const gst = platformFee * 0.18; // 18% on platform fee
-  const finalAmount = baseAmount + platformFee + gst; // in paise
+// Base price calculation
+const baseAmount = quantity * pricePerUnit;       // in ₹
+const platformFee = baseAmount * 0.02;            // 2% of base
+const gst = platformFee * 0.18;                   // 18% of platform fee
+const total = baseAmount + platformFee + gst;     // grand total
 
-  // Convert to ₹ with 2 decimals for display
-  const finalAmountInRupees = (finalAmount / 100).toFixed(2);
+// Prepare values to pass cleanly
+const values = {
+  baseAmount: baseAmount.toFixed(2),
+  platformFee: platformFee.toFixed(2),
+  gst: gst.toFixed(2),
+  total: total.toFixed(2),
+};
 
-  return (
-    <>
-      {!submitted ? (
-        <Form
-          formData={formdata}
-          onInputChange={handleInputData}
-          onSubmit={handleSubmitbtn}
-        />
-      ) : (
-        <OrderSummary
-          price={pricePerUnit}
-          total={finalAmountInRupees} // pass the final amount including fees
-          formData={formdata}
-          setSubmitted={setSubmitted}
-        />
-      )}
-    </>
-  );
+return (
+  <>
+    {!submitted ? (
+      <Form
+        formData={formdata}
+        onInputChange={handleInputData}
+        onSubmit={handleSubmitbtn}
+      />
+    ) : (
+      <OrderSummary
+        price={pricePerUnit}
+        breakdown={values}           // ⬅️ FIXED HERE
+        formData={formdata}
+        setSubmitted={setSubmitted}
+      />
+    )}
+  </>
+);
 };

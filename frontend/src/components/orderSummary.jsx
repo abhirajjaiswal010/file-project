@@ -1,49 +1,50 @@
 import GradientText from "../animation/shinytext";
 import { useRazorpayPayment } from "./razorpay";
 import { useNavigate } from "react-router-dom";
-export const OrderSummary = ({ price, total, formData, setSubmitted }) => {
-   
+
+export const OrderSummary = ({ price, formData, setSubmitted, breakdown }) => {
   const navigate = useNavigate();
   const backendUrl = import.meta.env.VITE_BACKEND_HOST_URL;
 
-  const { handlePayment } = useRazorpayPayment(formData, total, backendUrl);
+  // Use grand total passed from OrderDetail for Razorpay
+  const { handlePayment } = useRazorpayPayment(
+    formData,
+    breakdown.total,
+    backendUrl
+  );
 
   const handleSuccess = (paymentData) => {
     navigate("/thank-you", { state: paymentData });
   };
 
- 
-
- 
-
   return (
     <div className="h-screen w-screen flex justify-center items-center bg-[#F6F0F0] p-4 antialiased capitalize">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-3">
         <GradientText
-                  colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
-                  animationSpeed={3}
-                  showBorder={false}
-                  className="custom-class text-3xl font-bold mb-3"
-                >
-                 Order Summary
-                </GradientText>
+          colors={["#40ffaa", "#4079ff", "#40ffaa", "#4079ff", "#40ffaa"]}
+          animationSpeed={3}
+          showBorder={false}
+          className="custom-class text-3xl font-bold mb-3"
+        >
+          Order Summary
+        </GradientText>
 
         <InfoRow label="Name" value={formData.name} color="#FAF1E6" />
         <InfoRow label="Email" value={formData.email} color="#FFFDF0" />
         <InfoRow label="Branch" value={formData.branch} color="#FAF1E6" />
         <InfoRow label="Year" value={formData.year} color="#FFFDF0" />
-        <InfoRow
-          label="Quantity Of Files"
-          value={formData.quantity}
-          color="#FAF1E6"
-        />
+        <InfoRow label="Quantity Of Files" value={formData.quantity} color="#FAF1E6" />
         <InfoRow label="Price Per Unit" value={`₹${price}`} color="#FFFDF0" />
 
-        <hr className="border-solid border-2 border-gray-600 mt-10" />
+        <hr className="border-solid border-2 border-gray-600 mt-6 mb-4" />
+
+        <InfoRow label="Base Price" value={`₹${breakdown.baseAmount}`} color="#FAF1E6" />
+        <InfoRow label="Platform Fee (2%)" value={`₹${breakdown.platformFee}`} color="#FFFDF0" />
+        <InfoRow label="GST on Platform Fee (18%)" value={`₹${breakdown.gst}`} color="#FAF1E6" />
 
         <div className="flex flex-row justify-between mt-6 text-2xl bg-green-200 py-1 px-3 rounded">
-          <strong>Total Price</strong>
-          <span>₹{total}</span>
+          <strong>Total Payable</strong>
+          <span>₹{breakdown.total}</span>
         </div>
 
         <button
