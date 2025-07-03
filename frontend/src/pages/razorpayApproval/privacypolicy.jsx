@@ -34,7 +34,7 @@ export const PrivacyPolicy = () => (
   </p>
 
   <p className="text-gray-700 text-base leading-relaxed">
-    For any concerns or questions about your privacy, please contact us at: <a href="mailto:harshittg143@gmail.com" className="text-blue-500 underline">harshittg143@gmail.com</a>.
+    For any concerns or questions about your privacy, please contact us at: <a href="mailto:svceshop@gmail.com" className="text-blue-500 underline">svceshop@gmail.com</a>.
   </p>
 </section>
 

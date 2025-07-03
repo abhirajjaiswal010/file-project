@@ -5,7 +5,7 @@ export const CancellationsAndRefunds = () => (
   </h5>
 
   <p className="text-gray-700 text-base leading-relaxed mb-2">
-    You may cancel your order within <span className="font-semibold">12 hours</span> of placing it by contacting us at <a href="mailto:yourbusiness@email.com" className="text-blue-500 underline">harshittg143@gmail.com</a>. Please provide your order details to help us process the cancellation quickly.
+    You may cancel your order within <span className="font-semibold">12 hours</span> of placing it by contacting us at <a href="mailto:yourbusiness@email.com" className="text-blue-500 underline">svceshop@gmail.com</a>. Please provide your order details to help us process the cancellation quickly.
   </p>
 
   <p className="text-gray-700 text-base leading-relaxed mb-2">
