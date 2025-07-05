@@ -78,7 +78,7 @@ router.post("/send", async (req, res) => {
       <hr style="margin: 30px 0; border-color: #e5e7eb;" />
 
       <p style="font-size: 12px; color: #6b7280; text-align: center;">
-        © 2025 Your Company. All rights reserved.
+     © 2025 SVCEFile. All rights reserved.
       </p>
     </div>
   </div>
