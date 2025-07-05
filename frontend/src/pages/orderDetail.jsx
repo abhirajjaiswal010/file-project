@@ -4,8 +4,7 @@ import { OrderSummary } from "../components/orderSummary";
 import toast from "react-hot-toast";
 
 export const OrderDetail = () => {
-  // Fixed price per unit set by admin in ₹
-  const pricePerUnit = 13; // ₹13 per unit
+  const pricePerUnit = 13;
 
   const [formdata, setFormData] = useState({
     name: "",
@@ -23,7 +22,8 @@ export const OrderDetail = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmitbtn = (event) => {
+  // Handles the initial form submission event (with event.preventDefault)
+  const handleFormSubmit = (event) => {
     event.preventDefault();
 
     if (
@@ -43,42 +43,47 @@ export const OrderDetail = () => {
       return;
     }
 
+    // This just starts OTP verification in Form component,
+    // so don't mark submitted yet here.
+  };
+
+  // Final submit after OTP verification, no event needed here
+  const finalSubmit = () => {
     setSubmitted(true);
     toast.success("Form filled successfully");
   };
 
   const quantity = Number(formdata.quantity) || 0;
 
-// Base price calculation
-const baseAmount = quantity * pricePerUnit;       // in ₹
-const platformFee = baseAmount * 0.02;            // 2% of base
-const gst = platformFee * 0.18;                   // 18% of platform fee
-const total = baseAmount + platformFee + gst;     // grand total
+  const baseAmount = quantity * pricePerUnit;
+  const platformFee = baseAmount * 0.02;
+  const gst = platformFee * 0.18;
+  const total = baseAmount + platformFee + gst;
 
-// Prepare values to pass cleanly
-const values = {
-  baseAmount: baseAmount.toFixed(2),
-  platformFee: platformFee.toFixed(2),
-  gst: gst.toFixed(2),
-  total: total.toFixed(2),
-};
+  const values = {
+    baseAmount: baseAmount.toFixed(2),
+    platformFee: platformFee.toFixed(2),
+    gst: gst.toFixed(2),
+    total: total.toFixed(2),
+  };
 
-return (
-  <>
-    {!submitted ? (
-      <Form
-        formData={formdata}
-        onInputChange={handleInputData}
-        onSubmit={handleSubmitbtn}
-      />
-    ) : (
-      <OrderSummary
-        price={pricePerUnit}
-        breakdown={values}           // ⬅️ FIXED HERE
-        formData={formdata}
-        setSubmitted={setSubmitted}
-      />
-    )}
-  </>
-);
+  return (
+    <>
+      {!submitted ? (
+        <Form
+          formData={formdata}
+          onInputChange={handleInputData}
+          onSubmit={handleFormSubmit}  // this handles form submit event (with e.preventDefault)
+          onFinalSubmit={finalSubmit}  // called after OTP verify, no event
+        />
+      ) : (
+        <OrderSummary
+          price={pricePerUnit}
+          breakdown={values}
+          formData={formdata}
+          setSubmitted={setSubmitted}
+        />
+      )}
+    </>
+  );
 };

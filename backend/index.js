@@ -2,6 +2,9 @@ import connectToMongo from "./Database/db.js";
 import express from 'express';
 import cors from 'cors';
 import payment from "./routes/payment.js";
+import otpRoutes from "./routes/otp.js";
+import dotenv from 'dotenv';
+dotenv.config();
 
 // Connect to MongoDB with logs
 connectToMongo()
@@ -9,14 +12,12 @@ connectToMongo()
   .catch(err => console.error("❌ MongoDB connection error:", err));
 
 const app = express();
-
-// Use the correct port for Render deployment
 const port = process.env.PORT || 4000;
 
 // Middleware
 app.use(express.json());
 app.use(cors({
-    origin: "*", // or "https://your-frontend-domain.com" for stricter security
+    origin: "*",
     methods: ["GET", "POST"]
 }));
 
@@ -25,8 +26,9 @@ app.get('/', (req, res) => {
     res.send('✅ Backend is live - Abhiraj');
 });
 
-// Payment routes
+// Routes
 app.use('/api/payment', payment);
+app.use('/api/otp', otpRoutes); // ⬅️ Added OTP route
 
 // Start the server
 app.listen(port, () => {
