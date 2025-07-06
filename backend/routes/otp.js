@@ -32,15 +32,62 @@ router.post("/send", async (req, res) => {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Your SVCE Shop OTP Code",
-    html: `
-      <div style="font-family: sans-serif; max-width: 600px; margin: auto;">
-        <h2 style="text-align: center;">Email Verification</h2>
-        <p>Hello,</p>
-        <p>Please use the following <strong>OTP</strong> to verify your email:</p>
-        <p style="font-size: 24px; text-align: center; font-weight: bold;">${generatedOtp}</p>
-        <p>This OTP will expire in 5 minutes.</p>
-      </div>
-    `,
+     html: `
+  <div style="
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    max-width: 600px; 
+    margin: auto; 
+    padding: 30px; 
+    border-radius: 12px; 
+    background: url('https://raw.githubusercontent.com/abhirajjaiswal010/file-project/main/frontend/src/assets/school.jpg') no-repeat center center / cover; 
+    color: #374151; /* dark pastel text */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  ">
+    <div style="background: rgba(255, 255, 255, 0.85); padding: 30px; border-radius: 12px;">
+
+      <img src="https://raw.githubusercontent.com/abhirajjaiswal010/file-project/main/frontend/src/assets/stationary.png" alt="Company Logo" style="width: 160px; display: block; margin: 0 auto 30px auto;" />
+
+      <h2 style="color: #2563EB; font-weight: 700; text-align: center; margin-bottom: 20px;">
+        Email Verification
+      </h2>
+
+      <p>Hello,</p>
+
+      <p>
+        Thank you for your request. Please use the following <strong>OTP</strong> to verify your email address:
+      </p>
+
+      <p style="
+        font-size: 36px; 
+        font-weight: 700; 
+        background-color: #bfdbfe; /* pastel light blue */
+        color: #1e3a8a; /* dark blue text */
+        text-align: center; 
+        padding: 20px 0; 
+        margin: 30px 0;
+        border-radius: 10px;
+        letter-spacing: 8px;
+        user-select: all;
+      ">
+        ${generatedOtp}
+      </p>
+
+      <p>
+        <strong>This code will expire in 5 minutes.</strong>
+      </p>
+
+      <p>
+        If you did not request this, please ignore this email.
+      </p>
+
+      <hr style="margin: 30px 0; border-color: #e5e7eb;" />
+
+      <p style="font-size: 12px; color: #6b7280; text-align: center;">
+     © 2025 SVCEFile. All rights reserved.
+      </p>
+    </div>
+  </div>
+`,
   };
 
   try {
