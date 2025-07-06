@@ -33,7 +33,7 @@ const ThankYouPage = () => {
       </div>
       <h1 className="text-3xl font-bold text-green-600 mb-1">Thank you!</h1>
       <p className="mb-2">Your order will be delivered at your college. 😊</p>
-      <p className="mb-4">📞 For help: <strong>7987109645</strong></p>
+      <p className="mb-4">📞 For help: <strong>+91-8817880287</strong></p>
 
       <div className="bg-gray-100 p-4 rounded shadow">
         <p><strong>Name:</strong> {name}</p>
