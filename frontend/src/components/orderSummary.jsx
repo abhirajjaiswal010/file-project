@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 
 export const OrderSummary = ({ price, formData, setSubmitted, breakdown }) => {
   const navigate = useNavigate();
-  // const backendUrl = import.meta.env.VITE_BACKEND_HOST_URL;
-const backendUrl="http://localhost:4000";
+  const backendUrl = import.meta.env.VITE_BACKEND_HOST_URL;
+
 
   const { handlePayment } = useRazorpayPayment(
     formData,
