@@ -74,7 +74,7 @@ export const Form = ({ formData, onInputChange, onSubmit, onFinalSubmit }) => {
     toast.loading("Verifying OTP...", { id: "otpVerify" });
     try {
       const response = await axios.post(
-        `${API_URL}/api/otp/send`,
+        `${API_URL}/api/otp/verify`,
         { email: formData.email, otp }
       );
       toast.success(response.data.message || "OTP verified successfully.", {
