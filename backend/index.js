@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import payment from "./routes/payment.js";
 import otpRoutes from "./routes/otp.js";
+import notifyOwner from "./routes/notifyOwner.js";
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -29,6 +30,8 @@ app.get('/', (req, res) => {
 // Routes
 app.use('/api/payment', payment);
 app.use('/api/otp', otpRoutes); // ⬅️ Added OTP route
+
+app.use("/api/notify-owner", notifyOwner);
 
 // Start the server
 app.listen(port, () => {
