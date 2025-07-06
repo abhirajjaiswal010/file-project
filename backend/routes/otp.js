@@ -3,31 +3,35 @@ import nodemailer from "nodemailer";
 
 const router = express.Router();
 
-let generatedOtp = ""; // In production, store in DB with expiry and user reference
+let generatedOtp = ""; // For demo. In production, store in DB with expiry/user reference
 
-router.post("/send", async (req, res) => {
+// Reusable transporter with pooling
+const transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS,
+  },
+  pool: true,
+  maxConnections: 5,
+  maxMessages: 20,
+});
+
+// Send OTP
+router.post("/send", (req, res) => {
   const { email } = req.body;
+
   if (!email) {
     return res.status(400).json({ message: "Email is required." });
   }
 
-  // Generate a 6-digit OTP
   generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
-
-  // Setup nodemailer transporter
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER, // Your Gmail
-      pass: process.env.EMAIL_PASS, // App password
-    },
-  });
 
   const mailOptions = {
     from: process.env.EMAIL_USER,
     to: email,
-    subject: "Your SVCE shop OTP Code",
-    html: `
+    subject: "Your SVCE Shop OTP Code",
+     html: `
   <div style="
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     max-width: 600px; 
@@ -85,17 +89,24 @@ router.post("/send", async (req, res) => {
 `,
   };
 
-  try {
-    await transporter.sendMail(mailOptions);
-    res.json({ message: "OTP sent to your email." });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Failed to send OTP.", error });
-  }
+  // ✅ Respond immediately
+  res.json({ message: "OTP is being sent to your email." });
+
+  // ✅ Send email in background
+  transporter.sendMail(mailOptions)
+    .then(() => {
+      console.log(`OTP sent to ${email}: ${generatedOtp}`);
+    })
+    .catch((error) => {
+      console.error("Error sending OTP:", error);
+      // Optionally store error logs for retry logic
+    });
 });
 
+// Verify OTP
 router.post("/verify", (req, res) => {
-  const { email, otp } = req.body;
+  const { otp } = req.body;
+
   if (otp === generatedOtp) {
     res.json({ message: "OTP verified successfully." });
   } else {
