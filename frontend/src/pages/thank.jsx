@@ -20,18 +20,62 @@ const ThankYouPage = () => {
     paymentMode,
   } = state;
 
-  const downloadReceipt = () => {
-    const input = document.getElementById("receipt-content");
-    html2canvas(input, { scale: 2, useCORS: true }).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgProps = pdf.getImageProperties(imgData);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-      pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`Receipt_${razorpay_order_id || "Order"}.pdf`);
-    });
+const downloadReceipt = () => {
+  const pdf = new jsPDF();
+
+  const pageWidth = pdf.internal.pageSize.getWidth();
+  const margin = 20;
+  const contentWidth = pageWidth - margin * 2;
+
+  let y = 30;
+
+  // Draw dashed border rectangle
+  pdf.setLineDashPattern([2, 2], 0);
+  pdf.rect(margin, y - 15, contentWidth, 120, 'S'); // (x, y, width, height, style)
+
+  pdf.setFontSize(16);
+  pdf.text("Payment Receipt", pageWidth / 2, y, { align: "center" });
+  y += 10;
+
+  const currentDateTime = new Date().toLocaleString();
+  pdf.setFontSize(10);
+  pdf.text(`Date: ${currentDateTime}`, pageWidth - margin, y, { align: "right" });
+  y += 10;
+
+  pdf.setFontSize(12);
+  const lineSpacing = 8;
+
+  const addLine = (label, value) => {
+    pdf.text(`${label}:`, margin + 5, y);
+    pdf.text(`${value}`, margin + 50, y);
+    y += lineSpacing;
   };
+
+  addLine("Name", name);
+  addLine("Email", email);
+  addLine("Phone", phone);
+  addLine("Branch", branch);
+  addLine("Year", year);
+  addLine("Files", quantity);
+  addLine("Order ID", razorpay_order_id || "N/A");
+  if (razorpay_payment_id) {
+    addLine("Payment ID", razorpay_payment_id);
+  }
+  addLine("Payment Mode", paymentMode);
+  addLine("Total Paid", `${totalAmount}`);
+
+  y += 10;
+  pdf.setFontSize(10);
+  pdf.text(
+    "Thank you for your order with SVCE Files.",
+    pageWidth / 2,
+    y,
+    { align: "center" }
+  );
+
+  pdf.save(`Receipt_${razorpay_order_id || "Order"}.pdf`);
+};
+
 
   return (
     <div className="p-6 max-w-md mx-auto">
