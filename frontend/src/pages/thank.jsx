@@ -87,7 +87,7 @@ const downloadReceipt = () => {
             animation: "marquee 12s linear infinite",
           }}
         >
-          🚀 Order now for early bird delivery On Monday 🚀
+          🚀 Order now for early bird delivery On Monday 15 <sup>th</sup> july  🚀
         </div>
       </div>
       <h1 className="text-3xl font-bold text-green-600 mb-1">Thank you!</h1>
